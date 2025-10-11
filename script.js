@@ -28,11 +28,11 @@ const confirmBtn = document.querySelector("#confirmBtn");
 function display() {
     myLibrary.forEach((book) => {
         let bookRow = document.createElement("tr");
-        for (let bookProperty in book) {
+        ["title", "author", "pages", "read"].forEach((bookProperty) => {
             let bookData = document.createElement("td");
             bookData.textContent = book[bookProperty];
             bookRow.appendChild(bookData);
-        }
+        })
         table.appendChild(bookRow);
     })
 }
