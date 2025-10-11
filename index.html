@@ -16,6 +16,29 @@
             <th>Read Status</th>
         </tr>
     </table>
+    <button id="showDialog">New Book</button>
+    <dialog>
+        <form>
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="book_title">
+            </div>
+            <div>
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="book_author">
+            </div>
+            <div>
+                <label for="pages">Pages:</label>
+                <input type="text" id="pages" name="book_pages">
+            </div>
+            <div>
+                <label for="read-status">Read Status:</label>
+                <input type="checkbox" id="read-status" name="read-status">
+            </div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+        </form>
+    </dialog>
     <script src="script.js"></script>
 </body>
 </html>

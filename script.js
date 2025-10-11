@@ -17,6 +17,14 @@ function addBookToLibrary(title, author, pages, read) {
 
 let table = document.querySelector("table");
 
+const newBook = document.getElementById("showDialog");
+const bookDialog = document.querySelector("dialog");
+const bookTitle = document.querySelector("#title");
+const bookAuthor = document.querySelector("#author");
+const bookPages = document.querySelector("#pages");
+const bookRead = document.querySelector("#read-status");
+const confirmBtn = document.querySelector("#confirmBtn");
+
 function display() {
     myLibrary.forEach((book) => {
         let bookRow = document.createElement("tr");
@@ -28,5 +36,27 @@ function display() {
         table.appendChild(bookRow);
     })
 }
+
+newBook.addEventListener("click", () => {
+    bookDialog.showModal();
+})
+
+confirmBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "" && bookRead.value !== "") {
+        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.value);
+        let bookRow = document.createElement("tr");
+        ["title", "author", "pages", "read"].forEach((bookProperty) => {
+            let bookData = document.createElement("td");
+            bookData.textContent = myLibrary.at(-1)[bookProperty];
+            bookRow.appendChild(bookData);
+        })
+        table.appendChild(bookRow);
+        bookDialog.close();
+    }
+    else {
+        bookDialog.close();
+    }
+})
 
 display();
