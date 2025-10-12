@@ -60,6 +60,10 @@ confirmBtn.addEventListener("click", (event) => {
         removeBtn.textContent = "Remove";
         removeBtn.classList.add("removeBtn");
         bookRow.appendChild(removeBtn);
+        let toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = "Toggle Read";
+        toggleReadBtn.classList.add("toggleRead");
+        bookRow.appendChild(toggleReadBtn);
         table.appendChild(bookRow);
         bookDialog.close();
     }
@@ -77,4 +81,19 @@ table.addEventListener("click", (event) => {
                 table.removeChild(event.target.parentNode);
         })
     }
+    else if (event.target.classList.contains("toggleRead")) {
+        myLibrary.forEach(book => {
+            if (event.target.parentNode.getAttribute("data-id") === book.id) {
+                if (book.read) {
+                    book.read = false;
+                    event.target.previousElementSibling.previousElementSibling.textContent = book.read;
+                }
+                else {
+                    book.read = true;
+                    event.target.previousElementSibling.previousElementSibling.textContent = book.read;
+                }
+            }
+        })
+    }
 })
+
