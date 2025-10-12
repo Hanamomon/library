@@ -11,6 +11,13 @@ function Book(title, author, pages, read) {
     this.id = crypto.randomUUID();
 }
 
+Book.prototype.toggleRead = function () {
+    if (this.read)
+        this.read = false;
+    else
+        this.read = true;
+}
+
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
 }
@@ -87,14 +94,8 @@ table.addEventListener("click", (event) => {
     else if (event.target.classList.contains("toggleRead")) {
         myLibrary.forEach(book => {
             if (event.target.parentNode.parentNode.getAttribute("data-id") === book.id) {
-                if (book.read) {
-                    book.read = false;
-                    event.target.parentNode.previousElementSibling.textContent = book.read;
-                }
-                else {
-                    book.read = true;
-                    event.target.parentNode.previousElementSibling.textContent = book.read;
-                }
+                book.toggleRead();
+                event.target.parentNode.previousElementSibling.textContent = book.read;
             }
         })
     }
