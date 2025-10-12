@@ -22,7 +22,8 @@ const bookDialog = document.querySelector("dialog");
 const bookTitle = document.querySelector("#title");
 const bookAuthor = document.querySelector("#author");
 const bookPages = document.querySelector("#pages");
-const bookRead = document.querySelector("#read-status");
+const bookRead = document.querySelector("#read");
+const bookUnread = document.querySelector("#unread");
 const confirmBtn = document.querySelector("#confirmBtn");
 
 function display() {
@@ -43,8 +44,11 @@ newBook.addEventListener("click", () => {
 
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "" && bookRead.value !== "") {
-        addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.value);
+    if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "") {
+        if (bookRead.checked)
+            addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, true);
+        else
+            addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, false);
         let bookRow = document.createElement("tr");
         ["title", "author", "pages", "read"].forEach((bookProperty) => {
             let bookData = document.createElement("td");
@@ -68,7 +72,6 @@ display();
 
 table.addEventListener("click", (event) => {
     if (event.target.classList.contains("removeBtn")) {
-        console.log(event.target);
         myLibrary.forEach(book => {
             if (event.target.parentNode.getAttribute("data-id") === book.id)
                 table.removeChild(event.target.parentNode);

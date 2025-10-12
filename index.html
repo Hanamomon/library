@@ -32,8 +32,13 @@
                 <input type="text" id="pages" name="book_pages">
             </div>
             <div>
-                <label for="read-status">Read Status:</label>
-                <input type="checkbox" id="read-status" name="read-status">
+                <fieldset>
+                    <legend>Read Status:</legend>
+                    <input type="radio" id="unread" name="read-status" value="unread" checked>
+                    <label for="unread">Unread</label>
+                    <input type="radio" id="read" name="read-status" value="read">
+                    <label for="read">Read</label>
+                </fieldset>
             </div>
             <button value="cancel" formmethod="dialog">Cancel</button>
             <button id="confirmBtn" value="default">Confirm</button>
