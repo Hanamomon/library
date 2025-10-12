@@ -56,14 +56,17 @@ confirmBtn.addEventListener("click", (event) => {
             bookRow.appendChild(bookData);
         })
         bookRow.setAttribute("data-id", myLibrary.at(-1).id);
+        let manageBtns = document.createElement("div");
+        manageBtns.classList.add("manageBtns");
         let removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
         removeBtn.classList.add("removeBtn");
-        bookRow.appendChild(removeBtn);
+        manageBtns.appendChild(removeBtn);
         let toggleReadBtn = document.createElement("button");
         toggleReadBtn.textContent = "Toggle Read";
         toggleReadBtn.classList.add("toggleRead");
-        bookRow.appendChild(toggleReadBtn);
+        manageBtns.appendChild(toggleReadBtn);
+        bookRow.appendChild(manageBtns);
         table.appendChild(bookRow);
         bookDialog.close();
     }
@@ -77,20 +80,20 @@ display();
 table.addEventListener("click", (event) => {
     if (event.target.classList.contains("removeBtn")) {
         myLibrary.forEach(book => {
-            if (event.target.parentNode.getAttribute("data-id") === book.id)
-                table.removeChild(event.target.parentNode);
+            if (event.target.parentNode.parentNode.getAttribute("data-id") === book.id)
+                table.removeChild(event.target.parentNode.parentNode);
         })
     }
     else if (event.target.classList.contains("toggleRead")) {
         myLibrary.forEach(book => {
-            if (event.target.parentNode.getAttribute("data-id") === book.id) {
+            if (event.target.parentNode.parentNode.getAttribute("data-id") === book.id) {
                 if (book.read) {
                     book.read = false;
-                    event.target.previousElementSibling.previousElementSibling.textContent = book.read;
+                    event.target.parentNode.previousElementSibling.textContent = book.read;
                 }
                 else {
                     book.read = true;
-                    event.target.previousElementSibling.previousElementSibling.textContent = book.read;
+                    event.target.parentNode.previousElementSibling.textContent = book.read;
                 }
             }
         })
