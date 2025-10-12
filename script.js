@@ -1,6 +1,6 @@
-const myLibrary = [{title: "Metamorphosis", author: "Franz Kafka", pages: 100 , read: true},
-    {title: "1984", author: "George Orwell", pages: 278 , read: true},
-    {title: "Blood Meridian", author: "Cormac McCarthy", pages: 322 , read: false}
+const myLibrary = [{title: "Metamorphosis", author: "Franz Kafka", pages: 100 , read: true, id: "1"},
+    {title: "1984", author: "George Orwell", pages: 278 , read: true, id: "2"},
+    {title: "Blood Meridian", author: "Cormac McCarthy", pages: 322 , read: false, id: "3"}
 ];
 
 function Book(title, author, pages, read) {
@@ -51,6 +51,11 @@ confirmBtn.addEventListener("click", (event) => {
             bookData.textContent = myLibrary.at(-1)[bookProperty];
             bookRow.appendChild(bookData);
         })
+        bookRow.setAttribute("data-id", myLibrary.at(-1).id);
+        let removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add("removeBtn");
+        bookRow.appendChild(removeBtn);
         table.appendChild(bookRow);
         bookDialog.close();
     }
@@ -60,3 +65,13 @@ confirmBtn.addEventListener("click", (event) => {
 })
 
 display();
+
+table.addEventListener("click", (event) => {
+    if (event.target.classList.contains("removeBtn")) {
+        console.log(event.target);
+        myLibrary.forEach(book => {
+            if (event.target.parentNode.getAttribute("data-id") === book.id)
+                table.removeChild(event.target.parentNode);
+        })
+    }
+})
