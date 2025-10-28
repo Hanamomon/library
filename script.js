@@ -3,19 +3,21 @@ const myLibrary = [{title: "Metamorphosis", author: "Franz Kafka", pages: 100 , 
     {title: "Blood Meridian", author: "Cormac McCarthy", pages: 322 , read: false, id: "3"}
 ];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.id = crypto.randomUUID();
-}
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+    }
 
-Book.prototype.toggleRead = function () {
-    if (this.read)
-        this.read = false;
-    else
-        this.read = true;
+    toggleRead() {
+        if (this.read)
+            this.read = false;
+        else
+            this.read = true;
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -41,6 +43,11 @@ function display() {
             bookData.textContent = book[bookProperty];
             bookRow.appendChild(bookData);
         })
+        bookRow.setAttribute("data-id", book.id);
+        let removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add("removeBtn");
+        bookRow.appendChild(removeBtn);
         table.appendChild(bookRow);
     })
 }
