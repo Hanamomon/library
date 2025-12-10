@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Library</title>
     <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
     <table>
+        <caption>Library</caption>
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
@@ -19,18 +20,21 @@
     </table>
     <button id="showDialog">New Book</button>
     <dialog>
-        <form>
-            <div>
+        <form novalidate>
+            <div id="title_field">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="book_title">
+                <span class="error"></span>
             </div>
-            <div>
+            <div id="author_field">
                 <label for="author">Author:</label>
                 <input type="text" id="author" name="book_author">
+                <span class="error"></span>
             </div>
-            <div>
+            <div id="pages_field">
                 <label for="pages">Pages:</label>
                 <input type="text" id="pages" name="book_pages">
+                <span class="error"></span>
             </div>
             <div>
                 <fieldset>

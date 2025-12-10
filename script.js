@@ -34,6 +34,9 @@ const bookPages = document.querySelector("#pages");
 const bookRead = document.querySelector("#read");
 const bookUnread = document.querySelector("#unread");
 const confirmBtn = document.querySelector("#confirmBtn");
+const titleError = document.querySelector("#title + .error");
+const authorError = document.querySelector("#author + .error");
+const pagesError = document.querySelector("#pages + .error");
 
 function display() {
     myLibrary.forEach((book) => {
@@ -52,13 +55,46 @@ function display() {
     })
 }
 
+function checkError() {
+    if (bookTitle.value === "") {
+        bookTitle.setCustomValidity("The title must be filled!");
+        titleError.textContent = "The title must be filled!";
+        titleError.classList.add("active");
+    } else {
+        bookTitle.setCustomValidity("");
+        titleError.textContent = "";
+        titleError.className = "error";
+    }
+
+    if (bookAuthor.value === "") {
+        bookAuthor.setCustomValidity("The author name must be filled!");
+        authorError.textContent = "The author name must be filled!";
+        authorError.classList.add("active");
+    } else {
+        bookAuthor.setCustomValidity("");
+        authorError.textContent = "";
+        authorError.className = "error";
+    }
+
+    if (bookPages.value === "") {
+        bookPages.setCustomValidity("The page number must be provided!");
+        pagesError.textContent = "The page number must be provided!";
+        pagesError.classList.add("active");
+    } else {
+        bookPages.setCustomValidity("");
+        pagesError.textContent = "";
+        pagesError.className = "error";
+    }
+}
+
 newBook.addEventListener("click", () => {
     bookDialog.showModal();
 })
 
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    if (bookTitle.value !== "" && bookAuthor.value !== "" && bookPages.value !== "") {
+    checkError();
+    if (bookDialog.firstElementChild.checkValidity()) {
         if (bookRead.checked)
             addBookToLibrary(bookTitle.value, bookAuthor.value, bookPages.value, true);
         else
@@ -85,7 +121,7 @@ confirmBtn.addEventListener("click", (event) => {
         bookDialog.close();
     }
     else {
-        bookDialog.close();
+        checkError();
     }
 })
 
